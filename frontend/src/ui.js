@@ -6,20 +6,26 @@ import { useState, useRef, useCallback } from 'react';
 import ReactFlow, { Controls, Background, MiniMap } from 'reactflow';
 import { useStore } from './store';
 import { shallow } from 'zustand/shallow';
-import { InputNode } from './nodes/inputNode';
-import { LLMNode } from './nodes/llmNode';
-import { OutputNode } from './nodes/outputNode';
-import { TextNode } from './nodes/textNode';
-
 import 'reactflow/dist/style.css';
+
+// Using nodeRender to get all nodes at once
+import { nodeRender } from "./nodes/nodeRender";
+
 
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
 const nodeTypes = {
-  customInput: InputNode,
-  llm: LLMNode,
-  customOutput: OutputNode,
-  text: TextNode,
+  customInput: nodeRender,
+  llm: nodeRender,
+  customOutput: nodeRender,
+  text: nodeRender,
+  
+  // Custom 5 nodes
+  zoho: nodeRender,
+  googlesheets: nodeRender,
+  slack: nodeRender,
+  webhook: nodeRender,
+  awss3: nodeRender,
 };
 
 const selector = (state) => ({

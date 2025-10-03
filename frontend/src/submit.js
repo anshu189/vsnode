@@ -12,7 +12,7 @@ export const SubmitButton = () => {
             const formData = new FormData();
             formData.append("pipeline", JSON.stringify({ nodes, edges }));
 
-            const response = await fetch("http://127.0.0.1:8000/pipelines/parse", {
+            const response = await fetch("http://localhost:8000/pipelines/parse", {
                 method: "POST",
                 CORS: 'no-cors',
                 body: formData, // send as form data

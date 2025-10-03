@@ -7,7 +7,7 @@ function App() {
     <div>
       <PipelineToolbar />
       <PipelineUI />
-      <SubmitButton />
+      <SubmitButton />/
     </div>
   );
 }
