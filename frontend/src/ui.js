@@ -94,6 +94,7 @@ export const PipelineUI = () => {
     event.dataTransfer.dropEffect = 'move';
   }, []);
 
+
   return (
     <>
       <div ref={reactFlowWrapper} style={{ width: '100wv', height: '70vh' }}>

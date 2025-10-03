@@ -42,7 +42,15 @@ export const nodeConfig = {
     width: 220,
     minHeight: 100,
     fields: [
-      { name: "text", label: "Text", type: "text" }
+      {
+        name: "text",
+        label: "Text",
+        type: "textarea",           // textarea: so wrapper auto-resizes
+        variableHandles: true,      // dynamic handles: bool
+        minWidth: 150,
+        maxWidth: 600,
+        minHeight: 40
+      }
     ],
     handles: [
       { id: "output", type: "source", position: "Right" }
