@@ -11,24 +11,21 @@ def read_root():
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],
-    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 @app.post('/pipelines/parse')
 def parse_pipeline(pipeline: str = Form(...)):
-    """
-    pipeline will be received as a JSON string inside a form field.
-    """
     try:
         data = json.loads(pipeline)
         nodes = data.get("nodes", [])
         edges = data.get("edges", [])
         return {
-            "status": "parsed",
+            "status": "success",
             "num_nodes": len(nodes),
-            "num_edges": len(edges)
+            "num_edges": len(edges),
+            "is_dag": True  # Placeholder for actual DAG check
         }
     except Exception as e:
         return {"status": "error", "message": str(e)}
