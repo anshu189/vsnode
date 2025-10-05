@@ -10,20 +10,19 @@ export const NodeWrapper = ({ id, type, data, config }) => {
   // Autoresize and store refs for textarea fields
   const textareaRefs = useRef({});
 
-  const setTextareaRef = (name) => (el) => {
-    if (el) textareaRefs.current[name] = el;
+  const setTextareaRef = (name) => (ele) => {
+    if (ele) textareaRefs.current[name] = ele;
   };
 
   useEffect(() => {
     (config.fields || []).forEach((field) => {
       if (field.type === "textarea") {
-        const el = textareaRefs.current[field.name];
-        const val = data?.[field.name] ?? ""; // use it for later handles connections
-        if (!el) return;
+        const ele = textareaRefs.current[field.name];
+        if (!ele) return;
 
-        // reset then set to scrollHeight so it grows with content
-        el.style.height = "auto";
-        el.style.height = `${el.scrollHeight}px`;
+        // set to scrollHeight so it grows with content vertically
+        ele.style.height = "auto";
+        ele.style.height = `${ele.scrollHeight}px`;
       }
     });
   }, [data, config.fields]);

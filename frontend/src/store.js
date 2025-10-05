@@ -40,6 +40,7 @@ export const useStore = create((set, get) => ({
         edges: addEdge({...connection, type: 'smoothstep', animated: true, markerEnd: {type: MarkerType.Arrow, height: '20px', width: '20px'}}, get().edges),
       });
     },
+    // Update edges state
     setEdges: (updater) => {
       set(state => ({ edges: typeof updater === 'function' ? updater(state.edges) : updater }));
     },

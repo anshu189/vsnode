@@ -4,8 +4,7 @@ import { nodeConfig } from "./nodeConfig";
 
 export const nodeRender = ({ id, type, data }) => {
   const config = nodeConfig[type];
-  // console.log(config)
-  if (!config) return <div>Unknown node type: {type}</div>;
+  if (!config) return <div>Invalid node type: {type}</div>;
 
   return <NodeWrapper id={id} type={type} data={data} config={config} />;
 };

@@ -7,27 +7,20 @@ import ReactFlow, { Controls, Background, MiniMap, addEdge, MarkerType } from 'r
 import { useStore } from './store';
 import { shallow } from 'zustand/shallow';
 import 'reactflow/dist/style.css';
+
 import { nodeConfig } from './nodes/nodeConfig';
 
 // Using nodeRender to get all nodes at once
 import { nodeRender } from "./nodes/nodeRender";
 
+const nodeTypes = Object.fromEntries(
+  Object.keys(nodeConfig).map(type => [type, nodeRender])
+);
+ 
 
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
-const nodeTypes = {
-  customInput: nodeRender,
-  llm: nodeRender,
-  customOutput: nodeRender,
-  text: nodeRender,
-  
-  // Custom 5 nodes
-  zoho: nodeRender,
-  googlesheets: nodeRender,
-  slack: nodeRender,
-  webhook: nodeRender,
-  awss3: nodeRender,
-};
+
 
 const selector = (state) => ({
   nodes: state.nodes,
@@ -81,7 +74,7 @@ export const PipelineUI = () => {
         const appData = JSON.parse(event.dataTransfer.getData('application/reactflow'));
         const type = appData?.nodeType;
 
-        // check if the dropped element is valid
+        // if the dropped element is valid or not
         if (typeof type === 'undefined' || !type) {
           return;
         }
@@ -121,7 +114,7 @@ export const PipelineUI = () => {
      */
     nodes.filter((node) => node.type === 'text').forEach((textNode) => {
         const textValue = textNode.data?.text || '';
-        // Regex for {{ var }} pattern
+        // Regex for {{ var }} pattern and returns the array of the variable names
         const variables = [...textValue.matchAll(/\{\{\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*\}\}/g)].map(m => m[1]);
         
         variables.forEach(varName => {
@@ -156,7 +149,7 @@ export const PipelineUI = () => {
               const newEdgeId = `autoedge-${srcNode.id}-${textNode.id}-${varName}`;
             
               if (!edges.some(e => e.id === newEdgeId)) {
-                // The target handle matches how you render dynamic handles:
+                // The target handle matches how we render dynamic handles
                 const targetHandle = `${textNode.id}-${varName}`;
                 let sourceHandle = 'output';
 
@@ -169,14 +162,14 @@ export const PipelineUI = () => {
                   type: 'smoothstep',
                   animated: true,
                   style: { strokeDasharray: '6 3' },
-                  markerEnd: { type: MarkerType.Arrow, height: '20px', width: '20px' } // adjust if needed
+                  markerEnd: { type: MarkerType.Arrow, height: '20px', width: '20px' }
                 }, eds));
               }
             }
           })
         })
       })
-    // 4. Update edges state only if it actually changed
+    // Updating edges state only if they are actually changed
     if (JSON.stringify(edges) !== JSON.stringify(nextEdges)) {
       setEdges(nextEdges);
     }
@@ -200,7 +193,7 @@ export const PipelineUI = () => {
           snapGrid={[gridSize, gridSize]}
           connectionLineType='smoothstep'
         >
-          <Background color="#aaa" gap={gridSize} />
+          <Background color="#676767" gap={gridSize} />
           <Controls />
           <MiniMap />
         </ReactFlow>
