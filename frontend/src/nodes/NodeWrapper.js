@@ -69,6 +69,7 @@ export const NodeWrapper = ({ id, type, data, config }) => {
           {field.type === "text" && (
             <input
               type="text"
+              // value={indx===0 ? id: (data[field.name] ?? field.name)}
               value={data[field.name] ?? field.name}
               onChange={(e) => updateNodeField(id, field.name, e.target.value)}
               className={`${indx===0?
