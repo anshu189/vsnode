@@ -48,38 +48,33 @@ export const NodeWrapper = ({ id, type, data, config }) => {
     updateNodeInternals(id);
   }, [id, variableMap, updateNodeInternals]);
 
-  // container style must be relative for top% handle positioning to work
-  const wrapperStyle = {
-    width: config.width ?? 200,
-    minHeight: config.minHeight ?? 80,
-    border: "1px solid black",
-    borderRadius: "5px",
-    backgroundColor: "#fff",
-    padding: "8px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "6px",
-    position: "relative", // IMPORTANT for handle top %
-    boxSizing: "border-box",
-  };
 
    return (
-    <div style={wrapperStyle}>
+    <div className={`relative flex flex-col gap-1 min-w-[${config.width??200}px] min-h-[${config.minHeight??80}px] bg-bg-light border-2 border-primary3 rounded-lg font-semibold p-1`}>
       {/* Title */}
-      <div style={{ fontWeight: "bold" }}>{config.label}</div>
+      <div className="flex items-center gap-2 text-t-light text-lg bg-primary4 border-2 p-1 border-primary2 rounded-md shadow-sh-s">
+        {config.icon && <config.icon className="w-4 h-4" />}
+        {config.label}
+      </div>
 
       {/* Fields rendering */}
-      {config.fields?.map((field) => (
-        <div key={field.name} style={{ display: "flex", flexDirection: "column" }}>
-          <label style={{ fontSize: 12, marginBottom: 6 }}>{field.label}</label>
+      {config.fields?.map((field, indx) => (
+        <div key={field.name} className="flex flex-col gap-1 px-1 mt-1 text-sm">
+          {/* Skip the first label */}
+          {indx !== 0 && (
+            <label className="text-t-light">{field.label}</label>
+          )}
 
           {/* simple text input */}
           {field.type === "text" && (
             <input
               type="text"
-              value={data[field.name] ?? ""}
+              value={data[field.name] ?? field.name}
               onChange={(e) => updateNodeField(id, field.name, e.target.value)}
-              style={{ padding: 6, borderRadius: 4 }}
+              className={`${indx===0?
+                "border px-2 py-1 rounded-md outline-none border-none text-primary text-center bg-primary4":
+                "border px-2 py-1 rounded-sm outline-none border-1 border-primary3 text-t-light bg-bg-light focus:ring-1 focus:ring-primary duration-100"
+              }`}
             />
           )}
 
@@ -88,7 +83,7 @@ export const NodeWrapper = ({ id, type, data, config }) => {
             <select
               value={data[field.name] ?? field.options?.[0] ?? ""}
               onChange={(e) => updateNodeField(id, field.name, e.target.value)}
-              style={{ padding: 6, borderRadius: 4 }}
+              className="border px-2 py-1 rounded-sm outline-none border-1 border-primary3 text-t-light"
             >
               {field.options?.map((opt) => (
                 <option key={opt} value={opt}>
@@ -104,15 +99,7 @@ export const NodeWrapper = ({ id, type, data, config }) => {
               ref={setTextareaRef(field.name)}
               value={data[field.name] ?? ""}
               onChange={(e) => updateNodeField(id, field.name, e.target.value)}
-              style={{
-                resize: "none",
-                overflow: "hidden",
-                minWidth: field.minWidth ?? 150,
-                minHeight: field.minHeight ?? 40,
-                padding: 6,
-                borderRadius: 4,
-                fontSize: 14,
-              }}
+              className="resize-none border px-2 py-1 rounded-sm outline-none border-1 border-primary3 text-t-light bg-bg-light focus:ring-1 focus:ring-primary duration-100"
             />
           )}
         </div>

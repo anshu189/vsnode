@@ -20,7 +20,7 @@ export const SubmitButton = () => {
             const data = await response.json();
             console.log("Backend Response:", data);
             toast.success(`num_nodes: ${data.num_nodes} \n num_edges: ${data.num_edges} \n is_dag: ${data.is_dag}`, {
-                duration: 1500,
+                duration: 2000,
                 position: 'top-right',
                 style: {
                     padding:'6px 22px',
@@ -35,7 +35,7 @@ export const SubmitButton = () => {
             });
         } catch (error) {
             toast.error("Error submitting pipeline", {
-                duration: 1500,
+                duration: 2000,
                 position: 'top-right',
             });
             // Developer log
@@ -44,8 +44,8 @@ export const SubmitButton = () => {
     };
 
     return (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <button type="submit" onClick={handleSubmit}>Submit</button>
+        <div className="flex justify-center items-center">
+            <button className="bg-primary font-semibold text-white py-2 px-10 rounded-md" type="submit" onClick={handleSubmit}>Submit</button>
             <Toaster />
         </div>
     );

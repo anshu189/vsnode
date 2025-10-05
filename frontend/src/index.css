@@ -1,3 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root{
+  /* <----- Light Theme -----> */
+  /* Primary color */
+  --primary:oklch(0.5854 0.2041 277.12); /*Bold*/
+  --primary2:rgba(105, 107, 255, 0.07); /*Extra Light*/
+  --primary3:rgba(105, 107, 255, 0.35); /*Light*/
+  --primary4:rgba(105, 107, 255, 0.14); /*A bi1 Light*/
+
+  /* Background color */
+  --bg-dark:oklch(0.90 0 264);
+  --bg:oklch(0.96 0 264);
+  --bg-light:oklch(1 0 264);
+  /* Text color */
+  --t-dark:oklch(0.1 0 264);
+  --t:oklch(0.2 0 264);
+  --t-light:oklch(0.3 0 264);
+  /* Shadows */
+  --sh-s: box inset 0 1px 2px #ffffff30, /*Top highlight*/
+  0 1px 4px #00000030, /*dark shadow*/
+  0 4px 8px #00000015; /*soft shadow*/
+  --sh-m: inset 0 1px 2px #ffffff50, /*Top highlight*/
+  0 2px 4px #00000030, /*dark shadow*/
+  0 4px 8px #00000015; /*soft shadow*/
+  --sh-l: inset 0 1px 2px #ffffff70, /*Top highlight*/
+  0 4px 6px #00000030, /*dark shadow*/
+  0 6px 10px #00000015; /*soft shadow*/
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,7 +41,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+input, select, textarea{
+  outline: none;
+  border: 1px solid black;
+}
+
+/* React Flow Handle Styling */
+.react-flow__handle {
+  width: 15px !important;
+  height: 15px !important;
+  background: var(--bg-light) !important;
+  border: 1px solid var(--primary) !important;
+}
+
+/* Right and Left Handle Styling */
+.react-flow__handle-right{
+  right: -9px !important;
+}
+.react-flow__handle-left{
+  left: -9px !important;
 }

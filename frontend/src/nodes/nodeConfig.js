@@ -1,6 +1,9 @@
+import { Cable, FolderInput, TextInitial, Brain, Diamond, Layers, Slack, Webhook, Database } from 'lucide-react';
+
 export const nodeConfig = {
   customInput: {
     label: "Input",
+    icon: Cable,
     width: 220,
     minHeight: 100,
     fields: [
@@ -14,7 +17,8 @@ export const nodeConfig = {
 
   llm: {
     label: "LLM",
-    width: 220,
+     icon: Brain,
+    width: 900,
     minHeight: 100,
     fields: [],
     handles: [
@@ -26,6 +30,7 @@ export const nodeConfig = {
 
   customOutput: {
     label: "Output",
+    icon: FolderInput,
     width: 220,
     minHeight: 100,
     fields: [
@@ -39,6 +44,7 @@ export const nodeConfig = {
 
   text: {
     label: "Text",
+    icon: TextInitial,
     width: 220,
     minHeight: 100,
     fields: [
@@ -60,9 +66,11 @@ export const nodeConfig = {
   // 5 new nodes definitions  
   zoho: {
     label: "Zoho",
+    icon: Diamond,
     width: 220,
     minHeight: 120,
     fields: [
+      { name: "productName", label: "Product Name", type: "text" },
       { name: "module", label: "Module", type: "select", options: ["Leads", "Contacts", "Deals"] },
       { name: "operation", label: "Operation", type: "select", options: ["Create", "Update", "Delete"] }
     ],
@@ -73,7 +81,8 @@ export const nodeConfig = {
   },
 
   googlesheets: {
-    label: "Google Sheets",
+    label: "Sheets",
+    icon: Layers,
     width: 220,
     minHeight: 120,
     fields: [
@@ -89,9 +98,11 @@ export const nodeConfig = {
 
   slack: {
     label: "Slack",
+    icon: Slack,
     width: 220,
     minHeight: 120,
     fields: [
+      { name: "slackName", label: "Slack Name", type: "text" },
       { name: "channel", label: "Channel", type: "text" },
       { name: "message", label: "Message", type: "text" }
     ],
@@ -103,9 +114,11 @@ export const nodeConfig = {
 
   webhook: {
     label: "Webhook",
+    icon: Webhook,
     width: 220,
     minHeight: 100,
     fields: [
+      { name: "webhookID", label: "WebHook ID", type: "text" },
       { name: "url", label: "URL", type: "text" },
       { name: "method", label: "Method", type: "select", options: ["GET", "POST", "PUT", "DELETE"] }
     ],
@@ -117,6 +130,7 @@ export const nodeConfig = {
 
   awss3: {
     label: "AWS S3",
+    icon: Database,
     width: 220,
     minHeight: 140,
     fields: [
